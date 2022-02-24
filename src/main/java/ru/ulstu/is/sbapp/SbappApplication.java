@@ -21,8 +21,8 @@ public class SbappApplication {
 		return String.format("Hello %s!", name);
 	}
 
-	@GetMapping("/FisUp")
-	public String FisUp(@RequestParam(value = "word") String word)
+	@GetMapping("/FirstIsUp")
+	public String FirstIsUp(@RequestParam(value = "word") String word)
 	{
 		return StringUtils.capitalize(word);
 	}
