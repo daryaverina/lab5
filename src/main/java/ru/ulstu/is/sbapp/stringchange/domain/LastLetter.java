@@ -1,8 +1,7 @@
 package ru.ulstu.is.sbapp.stringchange.domain;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import java.util.Arrays;
+import org.springframework.stereotype.Component;
 
+@Component(value = "last")
 public class LastLetter implements Stringchange{
     @Override
     public String change(String word) {
