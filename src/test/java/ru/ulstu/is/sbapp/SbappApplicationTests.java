@@ -15,19 +15,19 @@ class SbappApplicationTests {
 	@Test
 	void testFirstLetter(){
 		final String rez = stringchangeService.change("улгу", "first");
-		Assertions.assertEquals("улгу = Улгу!", rez);
+		Assertions.assertEquals("Улгу", rez);
 	}
 
 	@Test
 	void testLastLetter(){
 		final String rez = stringchangeService.change("улгу", "last");
-		Assertions.assertEquals("улгу = улгУ!", rez);
+		Assertions.assertEquals("улгУ", rez);
 	}
 
 	@Test
 	void testAllLetters(){
 		final String rez = stringchangeService.change("улгу", "all");
-		Assertions.assertEquals("улгу = УЛГУ!", rez);
+		Assertions.assertEquals("УЛГУ", rez);
 	}
 
 	@Test

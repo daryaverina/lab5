@@ -16,6 +16,6 @@ public class StringchangeController {
     @GetMapping("/")
     public String changer(@RequestParam(value = "word", defaultValue = "улгту") String word,
                           @RequestParam(value = "choice", defaultValue = "first") String choice) {
-        return stringchangeService.change(word, choice);
+        return String.format("%s = %s!", word, stringchangeService.change(word, choice));
     }
 }

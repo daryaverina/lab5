@@ -14,6 +14,6 @@ public class StringchangeService {
 
     public String change(String word, String choice){
         final Stringchange stringchange = (Stringchange) applicationContext.getBean(choice);
-        return String.format("%s = %s!", word, stringchange.change(word));
+        return stringchange.change(word);
     }
 }

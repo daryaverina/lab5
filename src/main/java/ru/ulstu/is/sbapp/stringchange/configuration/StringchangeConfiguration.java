@@ -12,21 +12,21 @@ import ru.ulstu.is.sbapp.stringchange.domain.LastLetter;
 public class StringchangeConfiguration {
     private final Logger log = LoggerFactory.getLogger(StringchangeConfiguration.class);
 
-    @Bean(value = "first", initMethod = "init", destroyMethod = "destroy")
+    @Bean(value = "first")
     public FirstLetter createFirstLetterChanger()
     {
         log.info("Call createFirstLetterChanger()");
         return new FirstLetter();
     }
 
-    @Bean(value = "last", initMethod = "init", destroyMethod = "destroy")
+    @Bean(value = "last")
     public LastLetter createLastLetterChanger()
     {
         log.info("Call createLastLetterChanger()");
         return new LastLetter();
     }
 
-    @Bean(value = "all", initMethod = "init", destroyMethod = "destroy")
+    @Bean(value = "all")
     public AllLetters createAllLettersChanger()
     {
         log.info("Call createAllLettersChanger()");

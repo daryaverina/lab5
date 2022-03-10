@@ -4,8 +4,6 @@ import org.slf4j.LoggerFactory;
 import java.util.Arrays;
 
 public class LastLetter implements Stringchange{
-    private final Logger log = LoggerFactory.getLogger(LastLetter.class);
-
     @Override
     public String change(String word) {
         char[] newword = new char[word.length()];
@@ -13,8 +11,4 @@ public class LastLetter implements Stringchange{
         newword[word.length() - 1] = (char) (word.charAt(word.length() - 1) - 32);
         return String.valueOf(newword);
     }
-
-    public void init() { log.info("LastLetter.init()"); }
-
-    public void destroy() { log.info("LastLetter.destroy()"); }
 }
