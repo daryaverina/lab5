@@ -5,33 +5,33 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import ru.ulstu.is.sbapp.stringchange.service.StringchangeService;
+import ru.ulstu.is.sbapp.speaker.service.SpeakerService;
 
 @SpringBootTest
 class SbappApplicationTests {
-	@Autowired
-	StringchangeService stringchangeService;
+    @Autowired
+    SpeakerService speakerService;
 
-	@Test
-	void testFirstLetter(){
-		final String rez = stringchangeService.change("улгу", "first");
-		Assertions.assertEquals("Улгу", rez);
-	}
+    @Test
+    void testSpeakerRus() {
+        final String res = speakerService.say("Мир", "ru");
+        Assertions.assertEquals("Привет Мир!", res);
+    }
 
-	@Test
-	void testLastLetter(){
-		final String rez = stringchangeService.change("улгу", "last");
-		Assertions.assertEquals("улгУ", rez);
-	}
+    @Test
+    void testSpeakerEng() {
+        final String res = speakerService.say("World", "en");
+        Assertions.assertEquals("Hello World!", res);
+    }
 
-	@Test
-	void testAllLetters(){
-		final String rez = stringchangeService.change("улгу", "all");
-		Assertions.assertEquals("УЛГУ", rez);
-	}
+    @Test
+    void testSpeakerDeu() {
+        final String res = speakerService.say("Welt", "de");
+        Assertions.assertEquals("Hallo Welt!", res);
+    }
 
-	@Test
-	void testStringchangeErrorWired() {
-		Assertions.assertThrows(NoSuchBeanDefinitionException.class, () -> stringchangeService.change("улгту", "fi"));
-	}
+    @Test
+    void testSpeakerErrorWired() {
+        Assertions.assertThrows(NoSuchBeanDefinitionException.class, () -> speakerService.say("Мир", "rus"));
+    }
 }
