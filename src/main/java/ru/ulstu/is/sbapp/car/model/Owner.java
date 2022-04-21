@@ -85,6 +85,6 @@ public class Owner {
                 " Id=" + Id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                '}';
+                " }";
     }
 }

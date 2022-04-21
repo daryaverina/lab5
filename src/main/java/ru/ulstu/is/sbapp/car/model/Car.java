@@ -88,6 +88,6 @@ public class Car {
                 " Id=" + Id +
                 ", model='" + model + '\'' +
                 ", price'" + price + '\'' +
-                '}';
+                " }";
     }
 }

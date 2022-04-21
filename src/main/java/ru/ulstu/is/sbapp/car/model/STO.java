@@ -84,6 +84,6 @@ public class STO {
         return "STO {" +
                 " Id=" + Id +
                 ", name='" + name + '\'' +
-                '}';
+                " }";
     }
 }
