@@ -10,17 +10,22 @@ import java.util.Objects;
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long Id;
 
     private String model;
 
     private float price;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "sto_id")
+    @ManyToOne()
+    @JoinColumn(name = "owner_fk")
     private Owner owner;
 
-    public Car(){ }
+    @ManyToOne()
+    @JoinColumn(name = "sto_fk")
+    private STO sto;
+
+    public Car(){
+    }
 
     public Car(String model, float price){
         this.model = model;
@@ -28,31 +33,35 @@ public class Car {
     }
 
     public Long getId() {
-        return id;
+        return Id;
     }
 
     public String getModel() {
         return model;
     }
 
-    public void setModel(String model) {
-        this.model = model;
-    }
-
     public float getPrice() {
         return price;
+    }
+
+    public Owner getOwner(){ return owner; }
+
+    public STO getSto(){ return sto; }
+
+    public void setModel(String model) {
+        this.model = model;
     }
 
     public void setPrice(float price) {
         this.price = price;
     }
 
-    public void setOwner(Owner owner) {
+    public void setOwner(Owner owner){
         this.owner = owner;
     }
 
-    public Owner getOwner() {
-        return owner;
+    public void setSto(STO sto){
+        this.sto = sto;
     }
 
     @Override
@@ -60,17 +69,17 @@ public class Car {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Car car = (Car) o;
-        return Objects.equals(id, car.id);
+        return Objects.equals(Id, car.Id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(Id);
     }
 
     public String toString() {
         return "Car{" +
-                "id=" + id +
+                "id=" + Id +
                 ", model='" + model + '\'' +
                 ", price'" + price + '\'' +
                 '}';

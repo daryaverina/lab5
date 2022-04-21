@@ -1,18 +1,21 @@
 package ru.ulstu.is.sbapp.car.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 //один ко многим с Car
 //в одном СТО много автомобилей
+@Entity
 public class STO {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    @Column()
+    private Long Id;
     private String name;
-    @OneToMany(mappedBy = "sto", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Car> cars;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "sto_fk")
+    private List<Car> cars = new ArrayList<>();
 
     public STO() {
     }
@@ -21,8 +24,13 @@ public class STO {
         this.name = name;
     }
 
+    public STO(String name, List<Car> cars){
+        this.name = name;
+        this.cars = cars;
+    }
+
     public Long getId() {
-        return id;
+        return Id;
     }
 
     public String getName() {
@@ -33,12 +41,26 @@ public class STO {
         this.name = name;
     }
 
-    public void setCars(Car car) {
-        cars.add(car);
+    public void setCar(Car car) {
+        if(!cars.contains(car))
+            cars.add(car);
     }
 
-    public Car getCars(int id) {
-        return cars.remove(id);
+    public void setCars(List<Car> cars){
+        for(var car : cars){
+            if(!cars.contains(car))
+                cars.add(car);
+        }
+    }
+
+    public int carsCount(){
+        if(cars != null) {
+            if (cars.size() == 0)
+                return 0;
+            return cars.size();
+        }
+        else
+            return 0;
     }
 
     @Override
@@ -46,18 +68,18 @@ public class STO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         STO sto = (STO) o;
-        return Objects.equals(id, sto.id);
+        return Objects.equals(Id, sto.Id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(Id);
     }
 
     @Override
     public String toString() {
         return "STO{" +
-                "id=" + id +
+                "Id=" + Id +
                 ", name='" + name + '\'' +
                 '}';
     }

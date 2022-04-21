@@ -18,7 +18,6 @@ import java.util.List;
 public class CarController {
     private final CarService carService;
 
-
     public CarController(CarService carService) {
         this.carService = carService;
     }
@@ -35,14 +34,14 @@ public class CarController {
 
     @PostMapping("/")
     public Car createCar(@RequestParam("model") String model,
-                                 @RequestParam("price") float price) {
+                         @RequestParam("price") float price) {
         return carService.addCar(model, price);
     }
 
     @PatchMapping("/{id}")
     public Car updateCar(@PathVariable Long id,
-                                 @RequestParam("model") String model,
-                                 @RequestParam("price") float price) {
+                         @RequestParam("model") String model,
+                         @RequestParam("price") float price) {
         return carService.updateCar(id, model, price);
     }
 
