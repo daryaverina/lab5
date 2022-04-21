@@ -29,6 +29,7 @@ public class CarTests {
 
     @Test
     void testCreate() {
+        log.info("testCreate");
         ownerService.deleteAllOwners();
         carService.deleteAllCars();
         stoService.deleteAllSTOs();
@@ -43,11 +44,6 @@ public class CarTests {
         STO sto1 = stoService.addSTO("СТО№1");
         STO sto2 = stoService.addSTO("СТО№2");
 
-        car1.setOwner(owner1);
-        car2.setOwner(owner2);
-        car1.setSto(sto1);
-        car2.setSto(sto1);
-
         stoService.setCar(sto1.getId(), car1);
         stoService.setCar(sto1.getId(), car2);
 
@@ -57,8 +53,8 @@ public class CarTests {
         log.info("Owner1 cars count: " + ownerService.carsCount(owner1.getId()));
         log.info("Owner2 cars count: " + ownerService.carsCount(owner2.getId()));
 
-        log.info("Car1 owner is: " + carService.findCar(car1.getId()).getOwner().getFirstName() + " " + carService.findCar(car1.getId()).getOwner().getLastName() + " Car1 sto is: " + carService.findCar(car1.getId()).getSto().getName());
-        log.info("Car2 owner is: " + carService.findCar(car2.getId()).getOwner().getFirstName() + " " + carService.findCar(car2.getId()).getOwner().getLastName() + "Car2 sto is: " + carService.findCar(car2.getId()).getSto().getName());
+        log.info("Car1 owner is: " + carService.findCar(car1.getId()).getOwner().getFirstName() + " " + carService.findCar(car1.getId()).getOwner().getLastName() + ". Car1 sto is: " + carService.findCar(car1.getId()).getSTO().getName());
+        log.info("Car2 owner is: " + carService.findCar(car2.getId()).getOwner().getFirstName() + " " + carService.findCar(car2.getId()).getOwner().getLastName() + ". Car2 sto is: " + carService.findCar(car2.getId()).getSTO().getName());
 
         log.info("STO1 cars count is: " + stoService.findSTO(sto1.getId()).carsCount());
         log.info("STO2 cars count is: " + stoService.findSTO(sto2.getId()).carsCount());
@@ -68,6 +64,7 @@ public class CarTests {
 
     @Test
     void testCarRead() {
+        log.info("testCarRead");
         carService.deleteAllCars();
         final Car car = carService.addCar("VW POLO", 999999);
         log.info(car.toString());
@@ -78,12 +75,14 @@ public class CarTests {
 
     @Test
     void testCarReadNotFound() {
+        log.info("testCarReadNotFound");
         carService.deleteAllCars();
         Assertions.assertThrows(EntityNotFoundException.class, () -> carService.findCar(-1L));
     }
 
     @Test
     void testCarReadAll() {
+        log.info("testCarReadAll");
         carService.deleteAllCars();
         carService.addCar("VW POLO", 999999);
         carService.addCar("Skoda Octavia", 1500000);
@@ -94,6 +93,7 @@ public class CarTests {
 
     @Test
     void testCarsReadAllEmpty() {
+        log.info("testCarsReadAllEmpty");
         carService.deleteAllCars();
         final List<Car> cars = carService.findAllCars();
         log.info(cars.toString());

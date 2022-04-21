@@ -40,6 +40,10 @@ public class Owner {
 
     public String getLastName(){ return lastName; }
 
+    public List<Car> getCars(){
+        return cars;
+    }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -50,12 +54,12 @@ public class Owner {
 
     public void setCar(Car car){
         if(!cars.contains(car))
+        {
             cars.add(car);
-    }
-    public void setCars(List<Car> cars){
-        for(var car : cars){
-            if(!cars.contains(car))
-                cars.add(car);
+            if(car.getOwner() != this)
+            {
+                car.setOwner(this);
+            }
         }
     }
 
@@ -77,8 +81,8 @@ public class Owner {
     }
 
     public String toString() {
-        return "Owner{" +
-                "id=" + Id +
+        return "Owner {" +
+                " Id=" + Id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 '}';

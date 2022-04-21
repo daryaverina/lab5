@@ -60,13 +60,6 @@ public class OwnerService {
     }
 
     @Transactional
-    public Owner setCars(Long id, List<Car> cars){
-        final Owner currentOwner = findOwner(id);
-        currentOwner.setCars(cars);
-        return em.merge(currentOwner);
-    }
-
-    @Transactional
     public int carsCount(Long id) {
         final Owner currentOwner = findOwner(id);
         return currentOwner.carsCount();

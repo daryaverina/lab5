@@ -46,7 +46,7 @@ public class Car {
 
     public Owner getOwner(){ return owner; }
 
-    public STO getSto(){ return sto; }
+    public STO getSTO(){ return sto; }
 
     public void setModel(String model) {
         this.model = model;
@@ -58,10 +58,16 @@ public class Car {
 
     public void setOwner(Owner owner){
         this.owner = owner;
+        if(!owner.getCars().contains(this)){
+            owner.setCar(this);
+        }
     }
 
-    public void setSto(STO sto){
+    public void setSTO(STO sto){
         this.sto = sto;
+        if(!sto.getCars().contains(this)){
+            sto.setCar(this);
+        }
     }
 
     @Override
@@ -78,8 +84,8 @@ public class Car {
     }
 
     public String toString() {
-        return "Car{" +
-                "id=" + Id +
+        return "Car {" +
+                " Id=" + Id +
                 ", model='" + model + '\'' +
                 ", price'" + price + '\'' +
                 '}';

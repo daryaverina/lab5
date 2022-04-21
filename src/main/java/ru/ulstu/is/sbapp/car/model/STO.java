@@ -37,19 +37,22 @@ public class STO {
         return name;
     }
 
+    public List<Car> getCars(){
+        return cars;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setCar(Car car) {
+    public void setCar(Car car){
         if(!cars.contains(car))
+        {
             cars.add(car);
-    }
-
-    public void setCars(List<Car> cars){
-        for(var car : cars){
-            if(!cars.contains(car))
-                cars.add(car);
+            if(car.getSTO() != this)
+            {
+                car.setSTO(this);
+            }
         }
     }
 
@@ -78,8 +81,8 @@ public class STO {
 
     @Override
     public String toString() {
-        return "STO{" +
-                "Id=" + Id +
+        return "STO {" +
+                " Id=" + Id +
                 ", name='" + name + '\'' +
                 '}';
     }

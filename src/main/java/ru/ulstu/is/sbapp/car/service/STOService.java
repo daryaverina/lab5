@@ -59,13 +59,6 @@ public class STOService {
     }
 
     @Transactional
-    public STO setCars(Long id, List<Car> cars){
-        final STO currentSTO = findSTO(id);
-        currentSTO.setCars(cars);
-        return em.merge(currentSTO);
-    }
-
-    @Transactional
     public int carsCount(Long id) {
         final STO currentSTO = findSTO(id);
         return currentSTO.carsCount();
