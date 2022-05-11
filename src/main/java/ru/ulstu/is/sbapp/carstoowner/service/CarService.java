@@ -31,12 +31,12 @@ public class CarService {
     }
 
     @Transactional
-    public Car addCar(String model, float price, String firstNameOw, String lastNameOw, String nameSTO) {
-        if(!StringUtils.hasText(model) || !StringUtils.hasText(firstNameOw) || !StringUtils.hasText(lastNameOw) || !StringUtils.hasText(nameSTO)) {
+    public Car addCar(String model, float price, long ownerId, long stoId) {
+        if(!StringUtils.hasText(model) || ownerId == 0 || stoId == 0) {
             throw new IllegalArgumentException("Car data is null or empty");
         }
-        var owner = ownerService.findOwnerByFIO(firstNameOw, lastNameOw);
-        var sto = stoService.findSTOByName(nameSTO);
+        var owner = ownerService.findOwner(ownerId);
+        var sto = stoService.findSTO(stoId);
         var car = new Car(model, price);
         car.setOwner(owner);
         car.setSTO(sto);
@@ -46,8 +46,7 @@ public class CarService {
 
     @Transactional
     public CarDto addCar(CarDto carDto) {
-        var name = Arrays.stream(carDto.getOwner().split("\\$")).toArray();
-        return new CarDto(addCar(carDto.getModel(), carDto.getPrice(), name[0].toString(), name[1].toString(), carDto.getSto()));
+        return new CarDto(addCar(carDto.getModel(), carDto.getPrice(), carDto.getOwner(), carDto.getSto()));
     }
 
 
@@ -63,24 +62,16 @@ public class CarService {
     }
 
     @Transactional
-    public Car updateCar(Long id, String model, float price, Long idSTO, Long idOwner) {
+    public Car updateCar(Long id, String model, float price, Long ownerId, Long stoId) {
         if(!StringUtils.hasText(model)) {
             throw new IllegalArgumentException("Car data is null or empty");
         }
         final Car currentcar = findCar(id);
-        var owner = ownerService.findOwner(idOwner);
-        var sto = stoService.findSTO(idSTO);
+        var owner = ownerService.findOwner(ownerId);
+        var sto = stoService.findSTO(stoId);
         currentcar.setModel(model);
         currentcar.setPrice(price);
-        if (currentcar.getSTO().getId().equals(idSTO)) {
-            currentcar.getSTO().updateCar(id, currentcar);
-        }
-        else {
-            currentcar.getSTO().removeCar(id);
-            currentcar.setSTO(sto);
-        }
-
-        if (currentcar.getOwner().getId().equals(idOwner)) {
+        if (currentcar.getOwner().getId().equals(ownerId)) {
             currentcar.getOwner().updateCar(id, currentcar);
         }
         else {
@@ -88,13 +79,20 @@ public class CarService {
             currentcar.setOwner(owner);
         }
 
+        if (currentcar.getSTO().getId().equals(stoId)) {
+            currentcar.getSTO().updateCar(id, currentcar);
+        }
+        else {
+            currentcar.getSTO().removeCar(id);
+            currentcar.setSTO(sto);
+        }
         validatorUtil.validate(currentcar);
         return carRepository.save(currentcar);
     }
 
     @Transactional
     public CarDto updateCar(CarDto carDto) {
-        return new CarDto(updateCar(carDto.getId(), carDto.getModel(), carDto.getPrice(), name[0].toString(), name[1].toString(), carDto.getSto()));
+        return new CarDto(updateCar(carDto.getId(), carDto.getModel(), carDto.getPrice(), carDto.getOwner(), carDto.getSto()));
     }
 
     @Transactional

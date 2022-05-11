@@ -10,8 +10,10 @@ import java.util.Objects;
 @Entity
 public class Owner {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long Id;
+    @SequenceGenerator(name = "owner_seq",
+            sequenceName = "owner_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "owner_seq")
+    private Long id;
     @NotBlank(message="Owner first name can't be null or empty")
     private String firstName;
     @NotBlank(message="Owner last name can't be null or empty")
@@ -34,7 +36,7 @@ public class Owner {
     }
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public String getFirstName() {
@@ -94,12 +96,12 @@ public class Owner {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Owner owner = (Owner) o;
-        return Objects.equals(Id, owner.Id);
+        return Objects.equals(id, owner.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Id);
+        return Objects.hash(id);
     }
 
     @Override

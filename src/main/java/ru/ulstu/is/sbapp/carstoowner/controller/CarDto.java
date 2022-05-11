@@ -8,24 +8,22 @@ public class CarDto {
     private long id;
     private String model;
     private float price;
-    private String owner = "";
-    private String sto ="";
+    private long owner;
+    private long sto;
 
     /*
     * можно ли хранить Id ownera и sto или сами объекты?*/
-    public CarDto() {
-
-    }
+    public CarDto() { }
 
     public CarDto(Car car) {
         this.id = car.getId();
         this.model = car.getModel();
         this.price = car.getPrice();
-        if(Objects.equals(this.getOwner(), "")){
-            owner = String.valueOf(car.getOwner());
+        if (car.getOwner() != null) {
+            owner = car.getOwner().getId();
         }
-        if(Objects.equals(this.getSto(), "")){
-            sto = String.valueOf(car.getSTO());
+        if (car.getSTO() != null) {
+            sto = car.getSTO().getId();
         }
     }
 
@@ -35,7 +33,7 @@ public class CarDto {
 
     public float getPrice() { return price; }
 
-    public String getSto(){ return sto; }
+    public long getSto(){ return sto; }
 
-    public String getOwner() { return owner; }
+    public long getOwner() { return owner; }
 }

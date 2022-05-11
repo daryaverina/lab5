@@ -10,8 +10,10 @@ import java.util.Objects;
 @Entity
 public class STO {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long Id;
+    @SequenceGenerator(name = "sto_seq",
+            sequenceName = "sto_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sto_seq")
+    private Long id;
     @NotBlank(message="STO name can't be null or empty")
     private String name;
 
@@ -32,7 +34,7 @@ public class STO {
     }
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public String getName() {
@@ -86,12 +88,12 @@ public class STO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         STO sto = (STO) o;
-        return Objects.equals(Id, sto.Id);
+        return Objects.equals(id, sto.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Id);
+        return Objects.hash(id);
     }
 
     public String toString() {

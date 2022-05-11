@@ -10,8 +10,10 @@ import java.util.Objects;
 @Entity
 public class Car {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long Id;
+    @SequenceGenerator(name = "car_seq",
+    sequenceName = "car_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "car_seq")
+    private Long id;
     @NotBlank (message="Car model can't be null or empty")
     private String model;
     private float price;
@@ -33,7 +35,7 @@ public class Car {
     }
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public String getModel() {
@@ -91,12 +93,12 @@ public class Car {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Car car = (Car) o;
-        return Objects.equals(Id, car.Id);
+        return Objects.equals(id, car.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Id);
+        return Objects.hash(id);
     }
 
     public String toString() {
