@@ -1,6 +1,7 @@
-package ru.ulstu.is.sbapp.car.model;
+package ru.ulstu.is.sbapp.carstoowner.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -11,6 +12,7 @@ public class STO {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
+    @NotBlank(message="STO name can't be null or empty")
     private String name;
 
     @OneToMany(fetch = FetchType.EAGER)
@@ -56,14 +58,27 @@ public class STO {
         }
     }
 
-    public int carsCount(){
-        if(cars != null) {
-            if (cars.size() == 0)
-                return 0;
-            return cars.size();
+    public Car removeCar(Long carId) {
+        for (var car : cars) {
+            if (Objects.equals(car.getId(), carId)){
+                cars.remove(car);
+                return car;
+            }
         }
-        else
-            return 0;
+        return null;
+    }
+
+    public void updateCar(Long id, Car c) {
+        for (var car : cars) {
+            if(Objects.equals(car.getId(), c.getId())) {
+                car = c;
+                return;
+            }
+        }
+    }
+
+    public void removeAllCars() {
+        cars.clear();
     }
 
     @Override
@@ -79,11 +94,7 @@ public class STO {
         return Objects.hash(Id);
     }
 
-    @Override
     public String toString() {
-        return "STO {" +
-                " Id=" + Id +
-                ", name='" + name + '\'' +
-                " }";
+        return name;
     }
 }

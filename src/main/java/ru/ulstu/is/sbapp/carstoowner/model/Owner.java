@@ -1,6 +1,7 @@
-package ru.ulstu.is.sbapp.car.model;
+package ru.ulstu.is.sbapp.carstoowner.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -11,7 +12,9 @@ public class Owner {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
+    @NotBlank(message="Owner first name can't be null or empty")
     private String firstName;
+    @NotBlank(message="Owner last name can't be null or empty")
     private String lastName;
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "owner_fk")
@@ -63,8 +66,27 @@ public class Owner {
         }
     }
 
-    public int carsCount(){
-        return cars.size();
+    public Car removeCar(Long carId) {
+        for (var car : cars) {
+            if (Objects.equals(car.getId(), carId)){
+                cars.remove(car);
+                return car;
+            }
+        }
+        return null;
+    }
+
+    public void removeAllCars() {
+        cars.clear();
+    }
+
+    public void updateCar(Long id, Car c) {
+        for (var car : cars) {
+            if(Objects.equals(car.getId(), c.getId())) {
+                car = c;
+                return;
+            }
+        }
     }
 
     @Override
@@ -80,11 +102,8 @@ public class Owner {
         return Objects.hash(Id);
     }
 
+    @Override
     public String toString() {
-        return "Owner {" +
-                " Id=" + Id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                " }";
+        return firstName + "$" + lastName;
     }
 }

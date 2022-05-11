@@ -1,6 +1,7 @@
-package ru.ulstu.is.sbapp.car.model;
+package ru.ulstu.is.sbapp.carstoowner.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 //Многие-к-одному к STO
 //Много автомобилей в одном СТО
@@ -11,9 +12,8 @@ public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
-
+    @NotBlank (message="Car model can't be null or empty")
     private String model;
-
     private float price;
 
     @ManyToOne()
@@ -70,6 +70,22 @@ public class Car {
         }
     }
 
+    public void removeOwner() {
+        if(owner.removeCar(getId()) != null)
+        {
+            owner.removeCar(getId());
+        }
+        owner = null;
+    }
+
+    public void removeSTO() {
+        if(sto.removeCar(getId()) != null)
+        {
+            sto.removeCar(getId());
+        }
+        sto = null;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -84,10 +100,6 @@ public class Car {
     }
 
     public String toString() {
-        return "Car {" +
-                " Id=" + Id +
-                ", model='" + model + '\'' +
-                ", price'" + price + '\'' +
-                " }";
+        return model + "$" + price;
     }
 }
