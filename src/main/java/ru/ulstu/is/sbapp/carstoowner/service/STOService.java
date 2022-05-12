@@ -5,15 +5,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
-import ru.ulstu.is.sbapp.carstoowner.controller.STODto;
-import ru.ulstu.is.sbapp.carstoowner.model.Car;
+import ru.ulstu.is.sbapp.carstoowner.controller.STO.STODto;
 import ru.ulstu.is.sbapp.carstoowner.model.STO;
 import ru.ulstu.is.sbapp.carstoowner.repository.STORepository;
 import ru.ulstu.is.sbapp.util.validation.ValidatorUtil;
 
-import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Optional;
 

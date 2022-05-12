@@ -1,17 +1,13 @@
 package ru.ulstu.is.sbapp.carstoowner.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
-import ru.ulstu.is.sbapp.carstoowner.controller.CarDto;
+import ru.ulstu.is.sbapp.carstoowner.controller.Car.CarDto;
 import ru.ulstu.is.sbapp.carstoowner.model.Car;
 import ru.ulstu.is.sbapp.carstoowner.repository.CarRepository;
 import ru.ulstu.is.sbapp.util.validation.ValidatorUtil;
 
-import javax.persistence.EntityNotFoundException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 

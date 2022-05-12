@@ -1,4 +1,4 @@
-package ru.ulstu.is.sbapp.carstoowner.controller;
+package ru.ulstu.is.sbapp.carstoowner.controller.Owner;
 
 import ru.ulstu.is.sbapp.carstoowner.model.Owner;
 

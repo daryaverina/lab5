@@ -1,7 +1,6 @@
-package ru.ulstu.is.sbapp.carstoowner.controller;
+package ru.ulstu.is.sbapp.carstoowner.controller.Owner;
 
 import org.springframework.web.bind.annotation.*;
-import ru.ulstu.is.sbapp.carstoowner.model.Owner;
 import ru.ulstu.is.sbapp.carstoowner.service.OwnerService;
 
 import javax.validation.Valid;

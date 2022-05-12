@@ -1,14 +1,14 @@
-package ru.ulstu.is.sbapp.carstoowner.controller;
+package ru.ulstu.is.sbapp.carstoowner.controller.Car;
 
 import org.springframework.web.bind.annotation.*;
-import ru.ulstu.is.sbapp.carstoowner.model.Car;
+import ru.ulstu.is.sbapp.WebConfiguration;
 import ru.ulstu.is.sbapp.carstoowner.service.CarService;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/car")
+@RequestMapping(WebConfiguration.REST_API + "/car")
 public class CarController {
     private final CarService carService;
 

@@ -1,18 +1,19 @@
-package ru.ulstu.is.sbapp.carstoowner.controller;
+package ru.ulstu.is.sbapp.carstoowner.controller.Car;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import ru.ulstu.is.sbapp.carstoowner.model.Car;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
 public class CarDto {
     private long id;
+    @NotBlank(message = "Model can't be null or empty")
     private String model;
     private float price;
     private long owner;
     private long sto;
 
-    /*
-    * можно ли хранить Id ownera и sto или сами объекты?*/
     public CarDto() { }
 
     public CarDto(Car car) {
@@ -27,11 +28,14 @@ public class CarDto {
         }
     }
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     public long getId() { return id; }
 
     public String getModel() { return model; }
+    //public void setModel(String model) { this.model = model; }
 
     public float getPrice() { return price; }
+    //public void setPrice(float price) { this.price = price; }
 
     public long getSto(){ return sto; }
 
