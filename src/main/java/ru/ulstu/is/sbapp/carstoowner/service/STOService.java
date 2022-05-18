@@ -35,6 +35,11 @@ public class STOService {
         return stoRepository.save(sto);
     }
 
+    @Transactional
+    public STO addSTO(STODto stoDto) {
+        return addSTO(stoDto.getName());
+    }
+
     @Transactional(readOnly = true)
     public STO findSTO(Long id) {
         final Optional<STO> sto = stoRepository.findById(id);

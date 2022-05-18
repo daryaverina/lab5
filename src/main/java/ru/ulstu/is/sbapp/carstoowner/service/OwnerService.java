@@ -35,6 +35,10 @@ public class OwnerService {
         return ownerRepository.save(owner);
     }
 
+    public Owner addOwner(OwnerDto ownerDto) {
+        return addOwner(ownerDto.getFirstName(), ownerDto.getLastName());
+    }
+
     @Transactional(readOnly = true)
     public Owner findOwner(Long id) {
         final Optional<Owner> owner = ownerRepository.findById(id);
