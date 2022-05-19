@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{default}">
+      layout:decorate="~{default}" xmlns:th="http://www.w3.org/1999/xhtml">
     <head>
         <title>Автомобиль</title>
     </head>
@@ -18,8 +18,13 @@
                     <input type="text" class="form-control" id="price" th:field="${carDto.price}" required>
                 </div>
                 <div class="mb-3">
-                    <label for="owner" class="form-label">Владелец</label>
-                    <input type="text" class="form-control" id="owner" th:field="${carDto.owner}" required>
+                    <label for="owner" class="form-label">Владельцы</label>
+                    <div class = "input-group">
+                        <select class="form-control" id="owner" th:field="${owners}">
+                            <option th:each = "owner, iterator: ${owners}" th:value="${owner.id}"
+                                    th:text="${owner.firstName} + ' ' + ${owner.lastName}"></option>
+                        </select>
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label for="sto" class="form-label">СТО</label>
