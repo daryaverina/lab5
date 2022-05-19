@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{default}">
+      layout:decorate="~{default}" xmlns:th="http://www.w3.org/1999/xhtml">
     <head>
         <title>Автомобили</title>
     </head>
@@ -32,8 +32,8 @@
                         <td th:text="${car.id}"></td>
                         <td th:text="${car.model}" style="width: 60%"></td>
                         <td th:text="${car.price}" style="width: 60%"></td>
-                        <td th:text="${car.owner}" style="width: 60%"></td>
-                        <td th:text="${car.sto}" style="width: 60%"></td>
+                        <td th:text="${car.owner_first_name} + ' ' + ${car.owner_last_name}" style="width: 60%"></td>
+                        <td th:text="${car.sto_name}" style="width: 60%"></td>
                         <td style="width: 10%">
                             <div class="btn-group" role="group" aria-label="Basic example">
                                 <a class="btn btn-warning button-fixed button-sm"
