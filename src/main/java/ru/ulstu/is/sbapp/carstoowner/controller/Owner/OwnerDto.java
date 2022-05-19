@@ -3,25 +3,23 @@ package ru.ulstu.is.sbapp.carstoowner.controller.Owner;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ru.ulstu.is.sbapp.carstoowner.model.Owner;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class OwnerDto {
     private long id;
     private String first_name;
     private String last_name;
-    private List<Long> cars;
+    private Map<Long, String> cars;
 
     public OwnerDto() {}
     public OwnerDto(Owner owner){
         this.id = owner.getId();
         this.first_name = owner.getFirstName();
         this.last_name = owner.getLastName();
-        cars = new ArrayList<>();
+        cars = new HashMap<>();
         if (owner.getCars() != null) {
             for (var car : owner.getCars()) {
-                cars.add(car.getId());
+                cars.put(car.getId(), car.getModel());
             }
         }
     }
@@ -32,5 +30,9 @@ public class OwnerDto {
 
     public String getLastName() { return last_name; }
 
-    public List<Long> getCars() { return cars; }
+    public Map<Long, String> getCars() { return cars; }
+
+    public void setFirstName(String first_name) { this.first_name = first_name; }
+
+    public void setLastName(String last_name) { this.last_name = last_name; }
 }

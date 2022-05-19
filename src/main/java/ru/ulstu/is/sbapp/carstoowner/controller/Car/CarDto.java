@@ -13,6 +13,9 @@ public class CarDto {
     private float price;
     private long owner;
     private long sto;
+    private String owner_first_name;
+    private String owner_last_name;
+    private String sto_name;
 
     public CarDto() { }
 
@@ -22,9 +25,12 @@ public class CarDto {
         this.price = car.getPrice();
         if (car.getOwner() != null) {
             owner = car.getOwner().getId();
+            owner_first_name = car.getOwner().getFirstName();
+            owner_last_name = car.getOwner().getLastName();
         }
         if (car.getSTO() != null) {
             sto = car.getSTO().getId();
+            sto_name = car.getSTO().getName();
         }
     }
 
@@ -38,4 +44,24 @@ public class CarDto {
     public long getSto(){ return sto; }
 
     public long getOwner() { return owner; }
+
+    public void setModel(String model) { this.model = model; }
+
+    public void setPrice(float price) { this.price = price; }
+
+    public void setSto(long sto){ this.sto = sto; }
+
+    public void setOwner(long owner) { this.owner = owner; }
+
+    public String getOwner_first_name() {
+        return owner_first_name;
+    }
+
+    public String getOwner_last_name() {
+        return owner_last_name;
+    }
+
+    public String getSto_name() {
+        return sto_name;
+    }
 }
