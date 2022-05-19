@@ -34,6 +34,7 @@ public class STOMvcController {
         else {
             model.addAttribute("stoId", id);
             model.addAttribute("stoDto", new STODto(stoService.findSTO(id)));
+            model.addAttribute("cars", stoService.findSTO(id).getCars());
         }
         return "sto-edit";
     }

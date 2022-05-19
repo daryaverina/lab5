@@ -20,7 +20,7 @@
                 <div class="mb-3">
                     <label for="owner" class="form-label">Владельцы</label>
                     <div class = "input-group">
-                        <select class="form-control" id="owner" th:field="${owners}">
+                        <select class="form-control" id="owner" th:field="${carDto.owner}">
                             <option th:each = "owner, iterator: ${owners}" th:value="${owner.id}"
                                     th:text="${owner.firstName} + ' ' + ${owner.lastName}"></option>
                         </select>
@@ -28,7 +28,12 @@
                 </div>
                 <div class="mb-3">
                     <label for="sto" class="form-label">СТО</label>
-                    <input type="text" class="form-control" id="sto" th:field="${carDto.sto}" required>
+                    <div class = "input-group">
+                        <select class="form-control" id="sto" th:field="${carDto.sto}">
+                            <option th:each = "sto, iterator: ${stos}" th:value="${sto.id}"
+                                    th:text="${sto.name}"></option>
+                        </select>
+                    </div>
                 </div>
                 <div class="mb-3">
                     <button type="submit" class="btn btn-primary button-fixed">

@@ -4,7 +4,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import ru.ulstu.is.sbapp.carstoowner.controller.Owner.OwnerDto;
+import ru.ulstu.is.sbapp.carstoowner.controller.STO.STODto;
 import ru.ulstu.is.sbapp.carstoowner.service.CarService;
+import ru.ulstu.is.sbapp.carstoowner.service.OwnerService;
+import ru.ulstu.is.sbapp.carstoowner.service.STOService;
 
 import javax.validation.Valid;
 
@@ -12,9 +16,13 @@ import javax.validation.Valid;
 @RequestMapping("/car")
 public class CarMvcController {
     private final CarService carService;
+    private final OwnerService ownerService;
+    private final STOService stoService;
 
-    public CarMvcController(CarService carService) {
+    public CarMvcController(CarService carService, OwnerService ownerService, STOService stoService) {
         this.carService = carService;
+        this.ownerService = ownerService;
+        this.stoService = stoService;
     }
 
     @GetMapping
@@ -35,6 +43,8 @@ public class CarMvcController {
             model.addAttribute("carId", id);
             model.addAttribute("carDto", new CarDto(carService.findCar(id)));
         }
+        model.addAttribute("owners", ownerService.findAllOwners().stream().map(OwnerDto::new).toList());
+        model.addAttribute("stos", stoService.findAllSTOs().stream().map(STODto::new).toList());
         return "car-edit";
     }
 

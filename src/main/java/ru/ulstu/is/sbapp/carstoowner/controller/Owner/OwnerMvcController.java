@@ -35,6 +35,7 @@ public class OwnerMvcController {
         else {
             model.addAttribute("ownerId", id);
             model.addAttribute("ownerDto", new OwnerDto(ownerService.findOwner(id)));
+            model.addAttribute("cars", ownerService.findOwner(id).getCars());
         }
         return "owner-edit";
     }
