@@ -14,6 +14,7 @@ public class WebConfiguration implements WebMvcConfigurer {
         WebMvcConfigurer.super.addViewControllers(registry);
         registry.addViewController("rest-test");
     }
+
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**").allowedMethods("*");

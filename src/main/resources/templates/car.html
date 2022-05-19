@@ -3,13 +3,13 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{default}">
     <head>
-        <title>Владельцы</title>
+        <title>Автомобили</title>
     </head>
     <body>
         <div layout:fragment="content">
             <div>
                 <a class="btn btn-success button-fixed"
-                   th:href="@{/owner/edit/}">
+                   th:href="@{/car/edit/}">
                     <i class="fa-solid fa-plus"></i> Добавить
                 </a>
             </div>
@@ -19,30 +19,34 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">ID</th>
-                        <th scope="col">Имя</th>
-                        <th scope="col">Фамилия</th>
+                        <th scope="col">Модель</th>
+                        <th scope="col">Стоимость</th>
+                        <th scope="col">Владелец</th>
+                        <th scope="col">СТО</th>
                         <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="owner, iterator: ${owners}">
+                    <tr th:each="car, iterator: ${cars}">
                         <th scope="row" th:text="${iterator.index} + 1"></th>
-                        <td th:text="${owner.id}"></td>
-                        <td th:text="${owner.firstName}" style="width: 60%"></td>
-                        <td th:text="${owner.lastName}" style="width: 60%"></td>
+                        <td th:text="${car.id}"></td>
+                        <td th:text="${car.model}" style="width: 60%"></td>
+                        <td th:text="${car.price}" style="width: 60%"></td>
+                        <td th:text="${car.owner}" style="width: 60%"></td>
+                        <td th:text="${car.sto}" style="width: 60%"></td>
                         <td style="width: 10%">
                             <div class="btn-group" role="group" aria-label="Basic example">
                                 <a class="btn btn-warning button-fixed button-sm"
-                                   th:href="@{/owner/edit/{id}(id=${owner.id})}">
+                                   th:href="@{/car/edit/{id}(id=${car.id})}">
                                     <i class="fa fa-pencil" aria-hidden="true"></i> Изменить
                                 </a>
                                 <button type="button" class="btn btn-danger button-fixed button-sm"
-                                        th:attr="onclick=|confirm('Удалить запись?') && document.getElementById('remove-${owner.id}').click()|">
+                                        th:attr="onclick=|confirm('Удалить запись?') && document.getElementById('remove-${car.id}').click()|">
                                     <i class="fa fa-trash" aria-hidden="true"></i> Удалить
                                 </button>
                             </div>
-                            <form th:action="@{/owner/delete/{id}(id=${owner.id})}" method="post">
-                                <button th:id="'remove-' + ${owner.id}" type="submit" style="display: none">
+                            <form th:action="@{/car/delete/{id}(id=${car.id})}" method="post">
+                                <button th:id="'remove-' + ${car.id}" type="submit" style="display: none">
                                     Удалить
                                 </button>
                             </form>

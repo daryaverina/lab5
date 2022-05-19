@@ -6,12 +6,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestController;
 import ru.ulstu.is.sbapp.carstoowner.service.CarNotFoundException;
 import ru.ulstu.is.sbapp.util.validation.ValidationException;
 
 import java.util.stream.Collectors;
 
-@ControllerAdvice
+@ControllerAdvice(annotations = RestController.class)
 public class AdviceController {
     @ExceptionHandler({
             CarNotFoundException.class,

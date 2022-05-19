@@ -49,9 +49,9 @@ public class OwnerMvcController {
             return "owner-edit";
         }
         if (id == null || id <= 0) {
-            ownerService.addOwner(ownerDto);
+            ownerService.addOwner(ownerDto.getFirstName(), ownerDto.getLastName());
         } else {
-            ownerService.updateOwner(ownerDto);
+            ownerService.updateOwner(id, ownerDto.getFirstName(), ownerDto.getLastName());
         }
         return "redirect:/owner";
     }

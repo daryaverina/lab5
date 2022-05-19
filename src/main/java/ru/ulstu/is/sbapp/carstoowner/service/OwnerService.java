@@ -35,26 +35,15 @@ public class OwnerService {
         return ownerRepository.save(owner);
     }
 
-    public Owner addOwner(OwnerDto ownerDto) {
-        return addOwner(ownerDto.getFirstName(), ownerDto.getLastName());
+    @Transactional
+    public OwnerDto addOwner(OwnerDto ownerDto) {
+        return new OwnerDto(addOwner(ownerDto.getFirstName(), ownerDto.getLastName()));
     }
 
     @Transactional(readOnly = true)
     public Owner findOwner(Long id) {
         final Optional<Owner> owner = ownerRepository.findById(id);
         return owner.orElseThrow(() -> new OwnerNotFoundException(id));
-    }
-
-    @Transactional(readOnly = true)
-    public Owner findOwnerByFIO(String firstName, String lastName) {
-        List<Owner> owners = ownerRepository.findAll();
-        for (var owner : owners) {
-            if (owner.getFirstName().equals(firstName) && owner.getLastName().equals(lastName))
-            {
-                return owner;
-            }
-        }
-        throw new EntityNotFoundException(String.format("Owner with fio [%s] [%s] is not found", firstName, lastName));
     }
 
     @Transactional(readOnly = true)
@@ -84,17 +73,6 @@ public class OwnerService {
         Owner currentOwner = findOwner(id);
         ownerRepository.delete(currentOwner);
         return currentOwner;
-    }
-
-    @Transactional
-    public void deleteAllOwnersUnS() {
-        log.warn("Unsafe usage!");
-        List<Owner> owners = findAllOwners();
-        for(var owner : owners){
-            if(owner.getCars().size() > 0)
-                owner.removeAllCars();
-        }
-        ownerRepository.deleteAll();
     }
 
     @Transactional

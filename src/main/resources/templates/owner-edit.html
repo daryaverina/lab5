@@ -2,62 +2,31 @@
 <html lang="en"
       xmlns:th="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{default}" xmlns:layout="http://www.w3.org/1999/xhtml">
-<head>
-</head>
-<body>
-<div layout:fragment="content">
-    <div th:text="${errors}" class="margin-bottom alert-danger"></div>
-    <form action="#" th:action="@{/owner/{id}(id=${id})}" th:object="${ownerDto}" method="post">
-        <div class="mb-3">
-            <label for="firstname" class="form-label">Имя</label>
-            <input type="text" class="form-control" id="firstname" th:field="${ownerDto.firstName}" required="true">
+    <head>
+        <title> Владелец</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div th:text="${errors}" class="margin-bottom alert-danger"></div>
+            <form action="#" th:action="@{/owner/{id}(id=${id})}" th:object="${ownerDto}" method="post">
+                <div class="mb-3">
+                    <label for="firstName" class="form-label">Имя</label>
+                    <input type="text" class="form-control" id="firstName" th:field="${ownerDto.firstName}">
+                </div>
+                <div class="mb-3">
+                    <label for="lastName" class="form-label">Фамилия</label>
+                    <input type="text" class="form-control" id="lastName" th:field="${ownerDto.lastName}">
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary button-fixed">
+                        <span th:if="${id == null}">Добавить</span>
+                        <span th:if="${id != null}">Обновить</span>
+                    </button>
+                    <a class="btn btn-secondary button-fixed" th:href="@{/owner}">
+                        Назад
+                    </a>
+                </div>
+            </form>
         </div>
-        <div class="mb-3">
-            <label for="lastname" class="form-label">Фамилия</label>
-            <input type="text" class="form-control" id="lastname" th:field="${ownerDto.lastName}" required="true">
-        </div>
-        <div class="mb-3">
-            <button type="submit" class="btn btn-primary button-fixed">
-                <span th:if="${id == null}">Добавить</span>
-                <span th:if="${id != null}">Обновить</span>
-            </button>
-            <a class="btn btn-secondary button-fixed" th:href="@{/owner}">
-                Назад
-            </a>
-        </div>
-    </form>
-    <div class="table-responsive">
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">ID</th>
-                <th scope="col">Имя</th>
-                <th scope="col">Фамилия</th>
-                <th scope="col">Город</th>
-                <th scope="col">Страна</th>
-                <th scope="col">Группа</th>
-                <th scope="col"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="student, iterator: ${students}">
-                <th scope="row" th:text="${iterator.index} + 1"/>
-                <td th:text="${student.id}"/>
-                <td th:text="${student.firstName}"/>
-                <td th:text="${student.lastName}"/>
-                <td th:text="${student.city}"/>
-                <td th:text="${student.country}"/>
-                <td th:text="${student.gruppa}"/>
-                <td >
-                    <input th:if="${student.gruppa == gruppaDto.name}" type="checkbox" checked>
-                </td>
-                <td style="width: 10%">
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-</body>
+    </body>
 </html>

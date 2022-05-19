@@ -1,13 +1,14 @@
 package ru.ulstu.is.sbapp.carstoowner.controller.STO;
 
 import org.springframework.web.bind.annotation.*;
+import ru.ulstu.is.sbapp.WebConfiguration;
 import ru.ulstu.is.sbapp.carstoowner.service.STOService;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/sto")
+@RequestMapping(WebConfiguration.REST_API + "/sto")
 public class STOController {
     private final STOService stoService;
 
@@ -33,8 +34,8 @@ public class STOController {
     }
 
     @PatchMapping("/{id}")
-    public STODto updateSTO(@RequestBody @Valid STODto stoDto){
-        return stoService.updateSTO(stoDto);
+    public STODto updateSTO(@PathVariable Long id, @RequestBody @Valid STODto stoDto){
+        return new STODto(stoService.updateSTO(id, stoDto.getName()));
     }
 
     @DeleteMapping("/{id}")

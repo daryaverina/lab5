@@ -1,5 +1,6 @@
 package ru.ulstu.is.sbapp.carstoowner.controller.STO;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import ru.ulstu.is.sbapp.carstoowner.model.STO;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class STODto {
     }
 
 
-
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     public long getId() { return id; }
 
     public String getName() { return name; }

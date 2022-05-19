@@ -1,13 +1,14 @@
 package ru.ulstu.is.sbapp.carstoowner.controller.Owner;
 
 import org.springframework.web.bind.annotation.*;
+import ru.ulstu.is.sbapp.WebConfiguration;
 import ru.ulstu.is.sbapp.carstoowner.service.OwnerService;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/owner")
+@RequestMapping(WebConfiguration.REST_API + "/owner")
 public class OwnerController {
     private final OwnerService ownerService;
 
@@ -28,14 +29,13 @@ public class OwnerController {
     }
 
     @PostMapping("/")
-    public OwnerDto createOwner(@RequestParam("firstName") String firstName,
-                             @RequestParam("lastName") String lastName) {
-        return new OwnerDto(ownerService.addOwner(firstName, lastName));
+    public OwnerDto createOwner(@RequestBody @Valid OwnerDto ownerDto) {
+        return new OwnerDto(ownerService.addOwner(ownerDto.getFirstName(), ownerDto.getLastName()));
     }
 
     @PatchMapping("/{id}")
-    public OwnerDto updateOwner(@RequestBody @Valid OwnerDto ownerDto) {
-        return ownerService.updateOwner(ownerDto);
+    public OwnerDto updateOwner(@PathVariable Long id, @RequestBody @Valid OwnerDto ownerDto) {
+        return new OwnerDto(ownerService.updateOwner(id, ownerDto.getFirstName(), ownerDto.getLastName()));
     }
 
     @DeleteMapping("/{id}")

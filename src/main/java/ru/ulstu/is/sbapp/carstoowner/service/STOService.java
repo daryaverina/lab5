@@ -36,26 +36,14 @@ public class STOService {
     }
 
     @Transactional
-    public STO addSTO(STODto stoDto) {
-        return addSTO(stoDto.getName());
+    public STODto addSTO(STODto stoDto) {
+        return new STODto(addSTO(stoDto.getName()));
     }
 
     @Transactional(readOnly = true)
     public STO findSTO(Long id) {
         final Optional<STO> sto = stoRepository.findById(id);
         return sto.orElseThrow(() -> new STONotFoundException(id));
-    }
-
-    @Transactional(readOnly = true)
-    public STO findSTOByName(String name) {
-        var stos = stoRepository.findAll();
-        for (var sto : stos)
-        {
-            if (sto.getName().equals(name)) {
-                return sto;
-            }
-        }
-        throw new EntityNotFoundException(String.format("STO with name [%s] is not found", name));
     }
 
     @Transactional(readOnly = true)
@@ -84,17 +72,6 @@ public class STOService {
         final STO currentSTO = findSTO(id);
         stoRepository.delete(currentSTO);
         return currentSTO;
-    }
-
-    @Transactional
-    public void deleteAllSTOsUnsafe() {
-        log.warn("Unsafe usage!");
-        List<STO> stos = findAllSTOs();
-        for(var sto : stos){
-            if(sto.getCars().size() > 0)
-                sto.removeAllCars();
-        }
-        stoRepository.deleteAll();
     }
 
     @Transactional

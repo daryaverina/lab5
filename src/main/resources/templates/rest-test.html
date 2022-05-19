@@ -3,52 +3,49 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{default}">
 <head>
-    <script type="text/javascript" src="/webjars/jquery/3.6.0/jquery.min.js"></script>
+  <title>Rest-Test</title>
+  <script type="text/javascript" src="/webjars/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-<div layout:fragment="content">
+  <div layout:fragment="content">
     <div class="table-responsive">
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">ID</th>
-                <th scope="col">Имя</th>
-                <th scope="col">Фамилия</th>
-                <th scope="col">Группа</th>
-            </tr>
-            </thead>
-            <tbody id="students">
-            </tbody>
-        </table>
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">ID</th>
+          <th scope="col">Модель</th>
+          <th scope="col">Стоимость</th>
+        </tr>
+        </thead>
+        <tbody id="cars">
+        </tbody>
+      </table>
     </div>
-</div>
+  </div>
 </body>
 <th:block layout:fragment="scripts">
-    <script>
-        $(document).ready(function () {
-            $.ajax({
-                url: "http://localhost:8080/api/student/"
-            }).then(function (data) {
-                $.each(data, function (index, value) {
-                    const row = $("<tr>");
-                    const number = $("<th>")
-                        .attr("scope", "row")
-                        .text(index + 1);
-                    const id = $("<td>").text(value.id);
-
-                    const firstName = $("<td>").text(value.firstName);
-                    const lastName = $("<td>").text(value.lastName);
-                    const gruppa = $("<td>").text(value.gruppa);
-                    row.append(number);
-                    row.append(id);
-                    row.append(firstName);
-                    row.append(lastName);
-                    row.append(gruppa);
-                    $("#students").append(row);
-                });
-            });
+  <script>
+    $(document).ready(function () {
+      $.ajax({
+        url: "http://localhost:8080/api/car/"
+      }).then(function (data) {
+        $.each(data, function (index, value) {
+          const row = $("<tr>");
+          const number = $("<th>")
+                  .attr("scope", "row")
+                  .text(index + 1);
+          const id = $("<td>").text(value.id);
+          const model = $("<td>").text(value.model);
+          const price = $("<td>").text(value.price);
+          row.append(number);
+          row.append(id);
+          row.append(model);
+          row.append(price);
+          $("#cars").append(row);
         });
-    </script>
+      });
+    });
+  </script>
 </th:block>
 </html>

@@ -48,9 +48,9 @@ public class STOMvcController {
             return "sto-edit";
         }
         if (id == null || id <= 0) {
-            stoService.addSTO(stoDto);
+            stoService.addSTO(stoDto.getName());
         } else {
-            stoService.updateSTO(stoDto);
+            stoService.updateSTO(id, stoDto.getName());
         }
         return "redirect:/sto";
     }

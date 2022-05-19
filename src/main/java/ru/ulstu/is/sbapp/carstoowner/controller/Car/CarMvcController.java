@@ -48,9 +48,9 @@ public class CarMvcController {
             return "car-edit";
         }
         if (id == null || id <= 0) {
-            carService.addCar(carDto);
+            carService.addCar(carDto.getModel(), carDto.getPrice(), carDto.getOwner(), carDto.getSto());
         } else {
-            carService.updateCar(carDto);
+            carService.updateCar(id, carDto.getModel(), carDto.getPrice(), carDto.getOwner(), carDto.getSto());
         }
         return "redirect:/car";
     }

@@ -1,5 +1,6 @@
 package ru.ulstu.is.sbapp.carstoowner.controller.Owner;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import ru.ulstu.is.sbapp.carstoowner.model.Owner;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class OwnerDto {
             }
         }
     }
-
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     public long getId() { return id; }
 
     public String getFirstName() { return first_name; }

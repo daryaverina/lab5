@@ -32,10 +32,8 @@ public class CarDto {
     public long getId() { return id; }
 
     public String getModel() { return model; }
-    //public void setModel(String model) { this.model = model; }
 
     public float getPrice() { return price; }
-    //public void setPrice(float price) { this.price = price; }
 
     public long getSto(){ return sto; }
 

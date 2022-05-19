@@ -30,12 +30,12 @@ public class CarController {
 
     @PostMapping("/")
     public CarDto createCar(@RequestBody @Valid CarDto carDto) {
-        return carService.addCar(carDto);
+        return new CarDto(carService.addCar(carDto.getModel(), carDto.getPrice(), carDto.getOwner(), carDto.getSto()));
     }
 
-    @PatchMapping("/")
-    public CarDto updateCar(@RequestBody @Valid CarDto carDto) {
-        return carService.updateCar(carDto);
+    @PatchMapping("/{id}")
+    public CarDto updateCar(@PathVariable Long id, @RequestBody @Valid CarDto carDto) {
+        return new CarDto(carService.updateCar(id, carDto.getModel(), carDto.getPrice(), carDto.getOwner(), carDto.getSto()));
     }
 
     @DeleteMapping("/{id}")
